@@ -1,0 +1,39 @@
+@mixin legend($property) {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  background-color: $property;
+  margin: auto;
+}
+.legend {
+  width: 67%;
+  text-align: center;
+}
+
+label {
+  margin: 0 15px;
+  font-size: 12px !important;
+  width: 32% !important;
+
+  .legend-holiday {
+    @include legend(#c69);
+  }
+
+  .legend-remote {
+    @include legend(#6c9);
+  }
+  .legend-sick{
+    @include legend(#966)
+  }
+  .legend-unpaid{
+    @include legend(#369)
+  }
+}
+
+.legend-paper {
+  z-index: 999 !important;
+  width: 16%;
+  h2 {
+    margin-top: 0;
+  }
+}

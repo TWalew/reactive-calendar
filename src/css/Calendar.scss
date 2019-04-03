@@ -1,0 +1,108 @@
+.calendar-wrapper{
+  .my-calendar{
+    .month-pagination {
+      a {
+        display: inline-block;
+        width: 5%;
+        color: #747478;
+        font-size: 24px;
+        padding: 10px 17px;
+        letter-spacing: normal;
+        word-wrap: normal;
+        direction: ltr;
+        border-radius: 50%;
+        background-size: cover;
+        transition: background-color ease-in-out .1s;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, .1);
+          color: #000;
+        }
+      }
+
+      span {
+        display: inline-block;
+        width: 88%;
+        font-size: 24px;
+        color: #747478;
+      }
+    }
+    .calendar{
+      .calendar-day{
+        width: 160px;
+        height: 160px;
+        display: inline-block;
+        border: 1px solid black;
+        &.today{
+          background-color: #e6e6e6;
+        }
+        &:nth-child(7n+1){
+          border-right: none;
+        }
+        &:nth-child(7n+2){
+          border-right: none;
+        }
+        &:nth-child(7n+3){
+          border-right: none;
+        }
+        &:nth-child(7n+4){
+          border-right: none;
+        }
+        &:nth-child(7n+5){
+          border-right: none;
+        }
+        &:nth-child(7n+6){
+          border-right: none;
+        }
+      }
+    }
+  }
+}
+.modal-content {
+   .modal-header {
+     color: #862C50;
+
+     h4 {
+       font-size: 2em;
+     }
+   }
+
+   .modal-body {
+     .form-group {
+       label {
+         text-align: left;
+         color: #862C50;
+         font-size: 1.1em;
+       }
+       .clearfix {
+         .date{
+           margin-top: 15px;
+         }
+         text-align: left;
+       }
+     }
+   }
+
+   .modal-footer {
+     div {
+       button {
+         margin-left: 25px;
+       }
+     }
+
+     button {
+       font-size: 0.9em;
+       font-weight: bold;
+       letter-spacing: 3px;
+     }
+   }
+ }
+.fade{
+  opacity: 1 !important;
+}
+.modal-backdrop{
+  background-color: transparent !important;
+}
+label{
+  margin: 0 !important;
+}
