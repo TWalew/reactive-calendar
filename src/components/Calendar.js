@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LoginStore from "../stores/LoginStore";
-import '../css/Calendar.scss'
+import '../css/Calendar.scss';
 import * as VisitorActions from "../actions/VisitorActions";
 
 export default class Calendar extends React.Component{
@@ -17,7 +17,7 @@ export default class Calendar extends React.Component{
         this.state={
             loggedInUser: null,
             days: [],
-            showModal: false,
+            showModalBook: false,
             titleValue: '',
             descrValue: '',
             currentDate: moment(new Date()),
@@ -29,8 +29,9 @@ export default class Calendar extends React.Component{
         this.loginStoreChanged = this.loginStoreChanged.bind(this);
         this.getDaysInMonth = this.getDaysInMonth.bind(this);
         this.monthPagination = this.monthPagination.bind(this);
-        this.handleModalShow = this.handleModalShow.bind(this);
-        this.handleModalClose = this.handleModalClose.bind(this);
+        this.handleModalBookShow = this.handleModalBookShow.bind(this);
+        this.handleModalBookClose = this.handleModalBookClose.bind(this);
+        this.handleModalBookSubmit = this.handleModalBookSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -44,7 +45,7 @@ export default class Calendar extends React.Component{
 
     loginStoreChanged() {
         let loggedInUser = LoginStore.getVisitor();
-        console.log(loggedInUser);
+        console.log("loginStoreChanged" ,loggedInUser);
         this.setState({
             loggedInUser,
         });
@@ -56,13 +57,12 @@ export default class Calendar extends React.Component{
         let stopDate = this.state.stopDate;
         while (startDate < stopDate) {
             dateArray.push({
-                id: moment(startDate).get('date') +'/'+ startDate.get('month'),
+                id: moment(startDate).get('date') +'/'+ startDate.get('month') + 1,
                 date: moment(startDate)._d,
                 dayOfWeek: moment(startDate).format('dddd')
             });
             startDate = moment(startDate).add(1, 'days');
         }
-        console.log(dateArray);
         return dateArray;
     }
 
@@ -74,46 +74,44 @@ export default class Calendar extends React.Component{
         });
     }
 
-    handleModalClose() {
-        this.setState({showModal: false});
+    handleModalBookClose() {
+        this.setState({showModalBook: false});
     }
 
-    handleModalShow() {
+    handleModalBookShow() {
         this.setState({
-            showModal: true,
+            showModalBook: true,
         });
     }
 
-    updateTitleValue(evt) {
-        this.setState({
-            titleValue: evt.target.value
-        });
+    deleteEvent(event){
+        alert(event);
     }
 
-    updateDescrValue(evt) {
+    handleModalBookSubmit(user,day,title,descr) {
+        console.log(user.username);
+        console.log(day);
+        console.log(title);
+        console.log(descr);
+        VisitorActions.RequestEvent(user.username, day, title, descr);
         this.setState({
-            descrValue: evt.target.value
-        });
-    }
-
-    handleModalSubmit() {
-        //TODO REQUEST TO ACTIONS ANT THEN INSERT EVENT IN SERVICE
-        //VisitorActions.RequestEvent();
-        this.setState({
-                showModal: false
+            showModalBook: false
             }
         );
     }
 
     ontValueChange = datePickerDate => this.setState({datePickerDate});
+    updateTitleValue(evt) {this.setState({titleValue: evt.target.value});}
+    updateDescrValue(evt) {this.setState({descrValue: evt.target.value});}
 
     render() {
         const days = this.getDaysInMonth();
-        console.log(days);
+        const events = LoginStore.getVisitor().events;
+        console.log('events', events);
         const today = new Date;
         return(
             <div className='calendar-wrapper'>
-                <Modal show={this.state.showModal} onHide={this.handleModalClose}>
+                <Modal show={this.state.showModalBook} onHide={this.handleModalBookClose}>
                     <Modal.Header closeButton>
                         <Modal.Title className="text-center">Book event</Modal.Title>
                     </Modal.Header>
@@ -167,14 +165,18 @@ export default class Calendar extends React.Component{
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="outlined" color="primary" size="large" className='pull-right'
-                                onClick={this.handleModalSubmit}>Submit</Button>
+                                onClick={this.handleModalBookSubmit.bind(this,
+                                    this.state.loggedInUser,
+                                    this.state.datePickerDate,
+                                    this.state.titleValue,
+                                    this.state.descrValue)}>Submit</Button>
 
                         <Button variant="outlined" color="secondary" size="large" className='pull-left'
-                                onClick={this.handleModalClose}>Close</Button>
+                                onClick={this.handleModalBookClose}>Close</Button>
                     </Modal.Footer>
                 </Modal>
                 <div className='controls'>
-                    <button onClick={this.handleModalShow}>Add new</button>
+                    <button onClick={this.handleModalBookShow}>Add new</button>
                     <button>Refresh</button>
                     <input type="text"/>
                 </div>
@@ -193,9 +195,26 @@ export default class Calendar extends React.Component{
                         days.map((day) =>{
                             return(
                                 <div className={'calendar-day' + (
-                                        moment(day.date).format('L') === moment(new Date()).format('L') ? ' today': ''
-                                )} key={day.id}>
-                                    {day.dayOfWeek}, {moment(day.date).format('L')}
+                                    moment(day.date).format('L') === moment(new Date()).format('L') ? ' today': ''
+                                ) + (events.map((event) =>{
+                                    if (moment(event.day).format('L') === moment(day.date).format('L')){
+                                        return ' event '
+                                    } else {return " "}
+                                }))} key={day.id}>
+                                    <div className='date'>
+                                        {day.dayOfWeek} {moment(day.date).format('D')}
+                                    </div>
+                                    {events.map((event) =>{
+                                        if (moment(event.day).format('L') === moment(day.date).format('L')){
+                                            return(
+                                                <div className='event-info' onClick={() => this.deleteEvent(event)}>
+                                                    <h4>{event.title}</h4>
+                                                    <span>{event.descr}</span>
+                                                </div>
+                                            )
+                                        }
+
+                                    })}
                                 </div>
                             )
                         })

@@ -28,13 +28,16 @@
       }
     }
     .calendar{
-      .calendar-day{
+      .calendar-day {
         width: 160px;
         height: 160px;
         display: inline-block;
         border: 1px solid black;
         &.today{
           background-color: #e6e6e6;
+        }
+        &.event{
+          background-color: #b3e6ff;
         }
         &:nth-child(7n+1){
           border-right: none;
@@ -54,49 +57,65 @@
         &:nth-child(7n+6){
           border-right: none;
         }
+        .date{
+          margin: 10px;
+        }
+        .event-info{
+          display: table;
+          margin: 10px;
+          h4{
+            font-weight: bold;
+          }
+        }
       }
     }
   }
 }
-.modal-content {
-   .modal-header {
-     color: #862C50;
-
-     h4 {
-       font-size: 2em;
-     }
-   }
-
-   .modal-body {
-     .form-group {
-       label {
-         text-align: left;
-         color: #862C50;
-         font-size: 1.1em;
+.modal-dialog{
+  top: 200px;
+  .modal-content {
+     .modal-header {
+       text-align: center;
+       color: #862C50;
+       .modal-title{
+         display: inline-block;
        }
-       .clearfix {
-         .date{
-           margin-top: 15px;
+       h4 {
+         font-size: 2em;
+       }
+     }
+
+     .modal-body {
+       .form-group {
+         label {
+           text-align: left;
+           color: #862C50;
+           font-size: 1.1em;
          }
-         text-align: left;
+         .clearfix {
+           .date{
+             margin-top: 15px;
+           }
+           text-align: left;
+         }
        }
      }
-   }
 
-   .modal-footer {
-     div {
+     .modal-footer {
+       div {
+         button {
+           margin-left: 25px;
+         }
+       }
+
        button {
-         margin-left: 25px;
+         font-size: 0.9em;
+         font-weight: bold;
+         letter-spacing: 3px;
        }
      }
-
-     button {
-       font-size: 0.9em;
-       font-weight: bold;
-       letter-spacing: 3px;
-     }
    }
- }
+}
 .fade{
   opacity: 1 !important;
 }

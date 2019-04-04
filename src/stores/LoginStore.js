@@ -4,6 +4,7 @@ import {getLocationStoreToken} from "./LocationStore";
 
 const ACT_LOGIN = 'LOGIN';
 const ACT_LOGOUT = 'LOGOUT';
+const ACT_REQUESTEVENT = 'REQUESTEVENT';
 
 class LoginStore extends EventEmitter {
     constructor(){
@@ -16,6 +17,7 @@ class LoginStore extends EventEmitter {
         this._actionMap = {
             [ACT_LOGIN]: this._login.bind(this),
             [ACT_LOGOUT]: this._logout.bind(this),
+            [ACT_REQUESTEVENT]: this._requestEvent.bind(this),
         };
     }
 
@@ -25,6 +27,16 @@ class LoginStore extends EventEmitter {
 
     _login(actionData) {
         this.data.loggedIn = {...actionData};
+        this.emit('change');
+    }
+
+    _requestEvent(actionData) {
+        let retrievedObject = JSON.parse(localStorage.getItem(actionData.username));
+        let newData = {
+            ...this.data,
+            loggedIn: retrievedObject
+        };
+        this.data = newData;
         this.emit('change');
     }
 

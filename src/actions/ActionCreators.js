@@ -25,3 +25,10 @@ export function OnRequestEvent(data) {
         data: data
     }
 }
+
+export function OnDeleteEvent(data) {
+    return {
+        type: 'DELETEEVENT',
+        data: data
+    }
+}
