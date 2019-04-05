@@ -1,3 +1,6 @@
+I have made an aditional feature when you mention a participant it automaticaly creates a profile for him if he doesen't have one or if the profile is already created the app just adds the event to his profile.
+Also the search functionality just moves the pagination to the month that the event is in.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
