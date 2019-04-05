@@ -1,5 +1,62 @@
-.calendar-wrapper{
-  .my-calendar{
+.calendar-wrapper {
+  .controls {
+    background-color: #f2f2f2;
+    padding: 60px 50px 30px 50px;
+    border-bottom: 10px solid #e6e6e6;
+
+    .controls-btn {
+      button {
+        margin: 0 10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+    }
+
+    .controls-search {
+      .search {
+        bottom: 7px;
+        width: 300px;
+
+        label {
+          top: -10px;
+        }
+      }
+      .auto-suggest{
+        position: absolute;
+        width: 300px;
+        margin: 5px 5px 5px 20px;
+        padding: 0;
+        background-color: white;
+        li{
+          list-style-type: none;
+          border: 1px solid dodgerblue;
+          padding: 5px;
+          cursor: pointer;
+          &:hover{
+            background-color: dodgerblue;
+            color: white;
+          }
+          .suggestion-box{
+            width: 25%;
+            margin: 5px auto;
+            background-color: white;
+            border: 1px solid black;
+
+          }
+        }
+      }
+
+      svg {
+        color: #b3b3b3;
+        margin-right: 5px;
+        vertical-align: sub;
+      }
+    }
+  }
+
+  .my-calendar {
     .month-pagination {
       a {
         display: inline-block;
@@ -27,43 +84,63 @@
         color: #747478;
       }
     }
-    .calendar{
+
+    .calendar {
       .calendar-day {
         width: 160px;
         height: 160px;
         display: inline-block;
         border: 1px solid black;
-        &.today{
-          background-color: #e6e6e6;
+
+        &.today {
+          background-color: #f2f2f2;
         }
-        &.event{
+
+        &.event {
           background-color: #b3e6ff;
         }
-        &:nth-child(7n+1){
+
+        &:nth-child(7n+1) {
           border-right: none;
         }
-        &:nth-child(7n+2){
+
+        &:nth-child(7n+2) {
           border-right: none;
         }
-        &:nth-child(7n+3){
+
+        &:nth-child(7n+3) {
           border-right: none;
         }
-        &:nth-child(7n+4){
+
+        &:nth-child(7n+4) {
           border-right: none;
         }
-        &:nth-child(7n+5){
+
+        &:nth-child(7n+5) {
           border-right: none;
         }
-        &:nth-child(7n+6){
+
+        &:nth-child(7n+6) {
           border-right: none;
         }
-        .date{
+
+        .date {
           margin: 10px;
+          .today-span{
+            border: 1px solid gray;
+            color: gray;
+            padding: 2px;
+            margin: 5px 5px 5px 50px;
+            border-radius: 3px;
+            box-shadow: 1px 1px 2px gray;
+          }
         }
-        .event-info{
+
+        .event-info {
           display: table;
           margin: 10px;
-          h4{
+
+          h4 {
             font-weight: bold;
           }
         }
@@ -71,57 +148,66 @@
     }
   }
 }
-.modal-dialog{
+
+.modal-dialog {
   top: 200px;
+
   .modal-content {
-     .modal-header {
-       text-align: center;
-       color: #862C50;
-       .modal-title{
-         display: inline-block;
-       }
-       h4 {
-         font-size: 2em;
-       }
-     }
+    .modal-header {
+      text-align: center;
+      color: #862C50;
 
-     .modal-body {
-       .form-group {
-         label {
-           text-align: left;
-           color: #862C50;
-           font-size: 1.1em;
-         }
-         .clearfix {
-           .date{
-             margin-top: 15px;
-           }
-           text-align: left;
-         }
-       }
-     }
+      .modal-title {
+        display: inline-block;
+      }
 
-     .modal-footer {
-       div {
-         button {
-           margin-left: 25px;
-         }
-       }
+      h4 {
+        font-size: 2em;
+      }
+    }
 
-       button {
-         font-size: 0.9em;
-         font-weight: bold;
-         letter-spacing: 3px;
-       }
-     }
-   }
+    .modal-body {
+      .form-group {
+        label {
+          text-align: left;
+          color: #862C50;
+          font-size: 1.1em;
+        }
+
+        .clearfix {
+          .date {
+            margin-top: 15px;
+          }
+
+          text-align: left;
+        }
+      }
+    }
+
+    .modal-footer {
+      div {
+        button {
+          margin-left: 25px;
+        }
+      }
+
+      button {
+        font-size: 0.9em;
+        font-weight: bold;
+        letter-spacing: 3px;
+      }
+    }
+  }
 }
-.fade{
+
+.fade {
   opacity: 1 !important;
 }
-.modal-backdrop{
+
+.modal-backdrop {
   background-color: transparent !important;
 }
-label{
+
+label {
   margin: 0 !important;
 }

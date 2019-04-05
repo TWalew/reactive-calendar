@@ -11,9 +11,9 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import 'bootstrap/dist/css/bootstrap.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowLeft, faArrowRight} from '@fortawesome/free-solid-svg-icons'
+import {faArrowLeft, faArrowRight, faSearch} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faArrowLeft, faArrowRight);
+library.add(faArrowLeft, faArrowRight, faSearch);
 
 
 class App extends React.Component {

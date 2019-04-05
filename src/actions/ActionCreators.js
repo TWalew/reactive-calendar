@@ -26,9 +26,12 @@ export function OnRequestEvent(data) {
     }
 }
 
-export function OnDeleteEvent(data) {
+export function OnDeleteEvent(username, data) {
     return {
         type: 'DELETEEVENT',
-        data: data
+        data: {
+            username,
+            data
+        }
     }
 }
